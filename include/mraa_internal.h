@@ -60,6 +60,13 @@ mraa_platform_t mraa_x86_platform();
 mraa_platform_t mraa_arm_platform();
 
 /**
+ * runtime detect running mips platforms
+ *
+ * @return mraa_platform_t of the init'ed platform
+ */
+mraa_platform_t mraa_mips_platform();
+
+/**
  * helper function to check if file exists
  *
  * @param filename to check
