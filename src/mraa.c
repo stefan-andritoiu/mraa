@@ -322,12 +322,16 @@ mraa_get_pin_count()
 char*
 mraa_get_pin_name(int pin)
 {
+#ifdef BIGPLAT
     if (plat == NULL) {
         return NULL;
     }
     if (pin > (plat->phy_pin_count - 1) || pin < 0)
         return NULL;
     return (char*) plat->pins[pin].name;
+#else
+    return "UNAVAILABLE";
+#endif
 }
 
 mraa_boolean_t

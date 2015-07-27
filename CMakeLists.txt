@@ -60,6 +60,11 @@ option (BUILDPYTHON3 "Use python3 for building/installing" OFF)
 option (INSTALLGPIOTOOL "Install gpio tool" OFF)
 option (BUILDARCH "Override architecture to build for - override" OFF)
 option (TESTS "Override the addition of tests" ON)
+option (BIGPLAT "For platforms with 100's of MBs of ram" ON)
+
+if (BIGPLAT)
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DBIGPLAT=1")
+endif ()
 
 if (NOT BUILDSWIG)
   set (BUILDSWIGPYTHON OFF)
