@@ -20,9 +20,17 @@ target_link_libraries(api_common_hpp_unit GTest::GTest GTest::Main mraa)
 target_include_directories(api_common_hpp_unit PRIVATE "${CMAKE_SOURCE_DIR}/api")
 gtest_add_tests(api_common_hpp_unit "" AUTO)
 
+# Unit tests - C initio header methods
+add_executable(mraa_initio_h_unit api/mraa_initio_h_unit.cxx)
+target_link_libraries(mraa_initio_h_unit GTest::GTest GTest::Main mraa)
+target_include_directories(mraa_initio_h_unit PRIVATE "${CMAKE_SOURCE_DIR}/api")
+gtest_add_tests(mraa_initio_h_unit "" AUTO)
+
+
 # Add a custom target for unit tests
 add_custom_target(tests-unit ALL
     DEPENDS
         api_common_h_unit
         api_common_hpp_unit
+        mraa_initio_h_unit
     COMMENT "mraa unit test collection")
