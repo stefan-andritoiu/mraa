@@ -86,12 +86,14 @@
 #define BUS_KEY "bus"
 
 // IO keys
-#define GPIO_KEY "GPIO"
-#define SPI_KEY "SPI"
-#define UART_KEY "UART"
-#define I2C_KEY "I2C"
-#define PWM_KEY "PWM"
-#define AIO_KEY "AIO"
+#define AIO_KEY "a"
+#define GPIO_KEY "g"
+#define I2C_KEY "i"
+#define IIO_KEY "ii"
+#define PWM_KEY "p"
+#define SPI_KEY "s"
+#define UART_KEY "u"
+#define UART_OW_KEY "ow"
 
 #define MRAA_JSONPLAT_ENV_VAR "MRAA_JSON_PLATFORM"
 
@@ -497,3 +499,15 @@ typedef struct {
     uint8_t iio_device_count; /**< IIO device count */
 } mraa_iio_info_t;
 #endif
+
+/**
+ * Function pointer typedef for use with platform extender libraries.
+ * Currently only the FT42222.
+ *
+ * @param board Pointer to valid board structure.  If a mraa_board_t
+ * is initialized, it will be added to board->sub_platform
+ *
+ * @return MRAA_SUCCESS if a valid subplaform has been initialized,
+ * otherwise return MRAA_ERROR_PLATFORM_NOT_INITIALISED
+ */
+typedef mraa_result_t (*fptr_add_platform_extender)(mraa_board_t* board);

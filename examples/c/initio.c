@@ -1,6 +1,6 @@
 /*
- * Author: Henry Bruce <henry.bruce@intel.com>
- * Copyright (c) 2015 Intel Corporation.
+ * Author: Mihai Stefanescu <mihai.stefanescu@rinftech.com>
+ * Copyright (c) 2018 Intel Corporation.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,20 +22,28 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#pragma once
+#include <stdio.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "mraa/initio.h"
 
-#include <dlfcn.h>
-#include "mraa_internal.h"
+int
+main()
+{
+    printf("Starting example\n");
 
-mraa_result_t mraa_ftdi_ft4222_init();
-mraa_result_t mraa_ftdi_ft4222_get_version(unsigned int* versionChip, unsigned int* versionLib);
-mraa_board_t* mraa_ftdi_ft4222();
-void *libft4222_lib;
+    mraa_io_descriptor* desc;
+    if (mraa_io_init("g:3:1-upm_stuff", &desc) != MRAA_SUCCESS) {
+        printf("Error in mraa_io_init()\n");
+    }
 
-#ifdef __cplusplus
+    printf("Leftover string = %s\n", desc->leftover_str);
+
+    /* Check value set in mraa_io_init. */
+    printf("Gpio value = %d\n", mraa_gpio_read(desc->gpios[0]));
+
+    if (mraa_io_close(desc) != MRAA_SUCCESS) {
+        printf("failed to close mraa io descriptor\n");
+    }
+
+    printf("Done\n");
 }
-#endif
